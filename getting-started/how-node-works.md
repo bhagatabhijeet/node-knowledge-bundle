@@ -39,6 +39,8 @@ tied up per request for as long as that request takes.
 
 # Blocking (synchronous) architecture
 
+![A thread is grabbed by one request and sits idle waiting for the database, so new requests B, C, and D can't get a thread until it's freed](/assets/images/blocking-architecture.svg)
+
 This is how frameworks like ASP.NET or Rails behave out of the box. A
 request arrives, a thread is allocated to it, and if handling that
 request means querying a database, the thread sits and waits for the
@@ -53,6 +55,8 @@ efficiently, since most of that waiting thread's time is spent doing
 nothing but waiting.
 
 # Non-blocking (asynchronous) architecture
+
+![A single thread hands database waits off to the side, is freed instantly for the next request, and later picks the result back up from an event queue](/assets/images/non-blocking-architecture.svg)
 
 Node.js applications are asynchronous by default, with no extra work
 required to get that behavior (in ASP.NET, by contrast, an async model is

@@ -1,0 +1,51 @@
+<svg width="960" height="300" viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <rect width="960" height="300" fill="#ffffff"/>
+  <text x="480" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e293b">Blocking (synchronous) architecture</text>
+
+  <defs>
+    <marker id="arrow-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1 -->
+  <rect x="20" y="70" width="160" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="100" y="95" text-anchor="middle" font-size="13" fill="#1e293b">Request</text>
+  <text x="100" y="113" text-anchor="middle" font-size="13" fill="#1e293b">arrives</text>
+
+  <line x1="180" y1="100" x2="222" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-b)"/>
+
+  <!-- Step 2 -->
+  <rect x="224" y="70" width="180" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="314" y="95" text-anchor="middle" font-size="13" fill="#1e293b">Thread grabbed,</text>
+  <text x="314" y="113" text-anchor="middle" font-size="13" fill="#1e293b">queries the database</text>
+
+  <line x1="404" y1="100" x2="446" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-b)"/>
+
+  <!-- Step 3: blocked -->
+  <rect x="448" y="70" width="200" height="60" rx="8" fill="#ea580c"/>
+  <text x="548" y="95" text-anchor="middle" font-size="13" fill="#ffffff" font-weight="bold">Thread sits idle,</text>
+  <text x="548" y="113" text-anchor="middle" font-size="13" fill="#ffffff" font-weight="bold">waiting for the reply</text>
+
+  <line x1="648" y1="100" x2="690" y2="100" stroke="#64748b" stroke-width="2" marker-end="url(#arrow-b)"/>
+
+  <!-- Step 4 -->
+  <rect x="692" y="70" width="190" height="60" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="787" y="95" text-anchor="middle" font-size="13" fill="#1e293b">Response sent,</text>
+  <text x="787" y="113" text-anchor="middle" font-size="13" fill="#1e293b">thread finally freed</text>
+
+  <!-- Queued requests -->
+  <line x1="548" y1="130" x2="548" y2="165" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-b)"/>
+  <text x="548" y="185" text-anchor="middle" font-size="13" fill="#dc2626" font-weight="bold">Meanwhile, new requests can't get a thread:</text>
+
+  <rect x="330" y="220" width="110" height="44" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="385" y="247" text-anchor="middle" font-size="13" fill="#7f1d1d">Request B</text>
+
+  <rect x="460" y="220" width="110" height="44" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="515" y="247" text-anchor="middle" font-size="13" fill="#7f1d1d">Request C</text>
+
+  <rect x="590" y="220" width="110" height="44" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="645" y="247" text-anchor="middle" font-size="13" fill="#7f1d1d">Request D</text>
+
+  <text x="480" y="288" text-anchor="middle" font-size="12" fill="#64748b" font-style="italic">One thread per request, tied up for the request's full duration.</text>
+</svg>
