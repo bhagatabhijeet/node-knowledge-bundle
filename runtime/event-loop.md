@@ -52,6 +52,7 @@ process.nextTick(() => console.log('nextTick'));
 
 console.log('sync');
 ```
+*Full source: [event-loop-ordering.js](/assets/code/runtime/event-loop-ordering.js)*
 
 Output: `sync`, `nextTick`, `promise`, then `timeout`/`immediate` in an order
 that depends on the surrounding context (inside an I/O callback,

@@ -1,0 +1,6 @@
+{
+  "exports": {
+    ".": { "import": "./dist/index.mjs", "require": "./dist/index.cjs" },
+    "./package.json": "./package.json"
+  }
+}

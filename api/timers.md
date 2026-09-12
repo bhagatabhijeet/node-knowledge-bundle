@@ -32,6 +32,7 @@ clearTimeout(id);
 const intervalId = setInterval(fn, 1000);
 clearInterval(intervalId);
 ```
+*Full source: [timers-clear-timers.js](/assets/code/api/timers-clear-timers.js)*
 
 An uncleared `setInterval` keeps the process alive indefinitely, since
 Node.js won't exit while a timer is still pending — a common cause of a
@@ -44,6 +45,7 @@ const timer = setInterval(fn, 1000);
 timer.unref(); // don't let this timer alone keep the process alive
 timer.ref();   // undo unref()
 ```
+*Full source: [timers-unref-ref.js](/assets/code/api/timers-unref-ref.js)*
 
 `unref()` is useful for background/heartbeat timers that should never
 block a clean process exit on their own.

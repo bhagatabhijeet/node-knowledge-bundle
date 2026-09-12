@@ -22,6 +22,7 @@ runnable with `npm run <name>`:
   }
 }
 ```
+*Full source: [npm-scripts-basic.json](/assets/code/packaging/npm-scripts-basic.json)*
 
 A handful of names are conventional shortcuts npm recognizes without
 `run`: `npm start`, `npm test`, `npm stop`, `npm restart`.
@@ -40,6 +41,7 @@ after `<name>`:
   }
 }
 ```
+*Full source: [npm-lifecycle-hooks.json](/assets/code/packaging/npm-lifecycle-hooks.json)*
 
 `npm run build` runs all three in order. This convention applies to any
 script name, not just the npm-recognized shortcuts.
@@ -64,6 +66,7 @@ dependency installation:
   "workspaces": ["packages/*"]
 }
 ```
+*Full source: [npm-workspaces.json](/assets/code/packaging/npm-workspaces.json)*
 
 `npm install` at the root hoists shared dependencies once and symlinks
 each workspace package into the root `node_modules`. `npm run build

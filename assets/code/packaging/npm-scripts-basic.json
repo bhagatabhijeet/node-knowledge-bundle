@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "node --test",
+    "start": "node dist/index.js"
+  }
+}

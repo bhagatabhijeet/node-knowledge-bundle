@@ -27,6 +27,7 @@ Node.js picks a format per file using, in order:
 ```json
 { "name": "acme-lib", "type": "module" }
 ```
+*Full source: [package-json-type-module.json](/assets/code/runtime/package-json-type-module.json)*
 
 # package.json `exports`
 
@@ -42,6 +43,7 @@ tree:
   }
 }
 ```
+*Full source: [package-json-exports.json](/assets/code/runtime/package-json-exports.json)*
 
 A package with `exports` can ship **dual** builds — separate ESM and CJS
 entry points — so consumers on either module system resolve to a working

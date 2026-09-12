@@ -24,6 +24,7 @@ job.on('progress', (pct) => console.log(`${pct}%`));
 job.once('done', () => console.log('finished')); // fires at most once
 job.emit('progress', 50);
 ```
+*Full source: [events-emitter-basic-usage.js](/assets/code/api/events-emitter-basic-usage.js)*
 
 # The special `'error'` event
 
@@ -45,6 +46,7 @@ emitter.on('data', handler);
 emitter.off('data', handler); // or removeListener
 emitter.removeAllListeners('data');
 ```
+*Full source: [events-remove-listeners.js](/assets/code/api/events-remove-listeners.js)*
 
 Forgetting to remove listeners on short-lived objects (e.g. a per-request
 emitter subscribed to a long-lived singleton) is a common source of

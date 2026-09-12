@@ -24,6 +24,7 @@ fs.readFile('/etc/hosts', 'utf8', (err, data) => {
   console.log(data);
 });
 ```
+*Full source: [error-first-callback-readfile.js](/assets/code/runtime/error-first-callback-readfile.js)*
 
 Still used by callback-only APIs and internally by streams, but no longer
 the recommended style for new code because errors must be checked manually
@@ -44,6 +45,7 @@ readFile('/etc/hosts', 'utf8')
   .then((data) => console.log(data))
   .catch(handleError);
 ```
+*Full source: [promise-readfile-chain.js](/assets/code/runtime/promise-readfile-chain.js)*
 
 `Promise.all` (fails fast on first rejection), `Promise.allSettled` (waits
 for every promise, never rejects), and `Promise.race` combine multiple
@@ -64,6 +66,7 @@ async function readHosts() {
   }
 }
 ```
+*Full source: [async-await-readhosts.js](/assets/code/runtime/async-await-readhosts.js)*
 
 An `await` only pauses the enclosing `async function`; it does not block
 the event loop, and other callbacks/microtasks run while the awaited

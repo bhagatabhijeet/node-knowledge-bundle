@@ -40,6 +40,7 @@ try {
   // operational: input was invalid, handle locally
 }
 ```
+*Full source: [try-catch-json-parse.js](/assets/code/runtime/try-catch-json-parse.js)*
 
 # Process-level safety nets
 
@@ -54,6 +55,7 @@ process.on('unhandledRejection', (reason) => {
   process.exit(1);
 });
 ```
+*Full source: [process-level-error-handlers.js](/assets/code/runtime/process-level-error-handlers.js)*
 
 Both events are last-resort nets, not a substitute for handling errors
 where they occur. Node.js's own guidance treats a thrown
@@ -79,6 +81,7 @@ class NotFoundError extends Error {
   }
 }
 ```
+*Full source: [custom-error-class.js](/assets/code/runtime/custom-error-class.js)*
 
 # Related
 

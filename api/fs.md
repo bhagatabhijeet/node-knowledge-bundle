@@ -29,6 +29,7 @@ await fs.mkdir('logs', { recursive: true });
 await fs.stat('file.txt'); // size, mtime, isDirectory(), ...
 await fs.rm('tmp', { recursive: true, force: true });
 ```
+*Full source: [fs-common-operations.js](/assets/code/api/fs-common-operations.js)*
 
 # Streaming large files
 
@@ -39,6 +40,7 @@ For files that may be large, use a [stream](/runtime/streams.md) instead:
 fs.createReadStream('huge.log')
   .pipe(fs.createWriteStream('huge.log.copy'));
 ```
+*Full source: [fs-stream-copy-pipe.js](/assets/code/api/fs-stream-copy-pipe.js)*
 
 # Watching for changes
 

@@ -19,6 +19,7 @@ path.resolve('a', 'b');           // '/cwd/a/b' — resolve() anchors to CWD
                                    //             for a relative first segment
 path.join('a', 'b');              // 'a/b'       — join() never adds CWD
 ```
+*Full source: [path-join-vs-resolve.js](/assets/code/api/path-join-vs-resolve.js)*
 
 Use `path.resolve` when you need an absolute path (e.g. before passing to
 [fs](fs.md) from user-relative input); use `path.join` when you only need
@@ -35,6 +36,7 @@ path.basename('/a/b/file.txt');       // 'file.txt'
 path.extname('/a/b/file.txt');        // '.txt'
 path.dirname('/a/b/file.txt');        // '/a/b'
 ```
+*Full source: [path-parse-and-format.js](/assets/code/api/path-parse-and-format.js)*
 
 # Cross-platform paths
 

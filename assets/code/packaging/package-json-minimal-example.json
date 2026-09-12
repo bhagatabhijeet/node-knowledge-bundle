@@ -1,0 +1,17 @@
+{
+  "name": "acme-lib",
+  "version": "1.4.0",
+  "type": "module",
+  "exports": "./index.js",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}

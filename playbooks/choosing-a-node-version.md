@@ -47,6 +47,7 @@ cutoffs shift: <https://github.com/nodejs/release#release-schedule>.
 ```json
 { "engines": { "node": ">=22.0.0 <25.0.0" } }
 ```
+*Full source: [choosing-node-version-engines.json](/assets/code/playbooks/choosing-node-version-engines.json)*
 
 npm only warns on an `engines` mismatch by default; combine it with a
 `.nvmrc` (for `nvm`/`fnm` users) and a CI check

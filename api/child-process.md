@@ -24,6 +24,7 @@ const child = spawn('grep', ['error', 'app.log']);
 child.stdout.on('data', (chunk) => process.stdout.write(chunk));
 child.on('close', (code) => console.log(`exited with ${code}`));
 ```
+*Full source: [child-process-spawn-grep.js](/assets/code/api/child-process-spawn-grep.js)*
 
 # Shell injection risk
 
@@ -54,6 +55,7 @@ process.on('message', (msg) => {
   process.send({ result: msg.payload.length });
 });
 ```
+*Full source: [child-process-fork-ipc.js](/assets/code/api/child-process-fork-ipc.js)*
 
 `fork` is specific to launching other Node.js processes; it wires up a
 message-passing channel (`.send()`/`'message'`) on top of `spawn`. For

@@ -46,6 +46,7 @@ generated: { by: reference_agent/claude-sonnet-5, at: 2026-09-12T00:00:00Z }
   }
 }
 ```
+*Full source: [package-json-minimal-example.json](/assets/code/packaging/package-json-minimal-example.json)*
 
 # Lockfiles
 

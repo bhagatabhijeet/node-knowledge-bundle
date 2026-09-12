@@ -20,6 +20,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(3000);
 ```
+*Full source: [http-minimal-server.js](/assets/code/api/http-minimal-server.js)*
 
 `req` is a readable [stream](/runtime/streams.md) (an
 `IncomingMessage`); `res` is a writable stream (`ServerResponse`). Neither
@@ -36,6 +37,7 @@ req.on('end', () => {
   const parsed = JSON.parse(body); // guard with try/catch — see error handling
 });
 ```
+*Full source: [http-read-request-body.js](/assets/code/api/http-read-request-body.js)*
 
 Frameworks (Express, Fastify, Koa) wrap this pattern; the low-level module
 does not parse bodies, query strings, or routes for you.
@@ -53,6 +55,7 @@ const req = request('http://example.com/api', { method: 'GET' }, (res) => {
 req.on('error', handleError); // network errors surface here, not via throw
 req.end();
 ```
+*Full source: [http-make-request.js](/assets/code/api/http-make-request.js)*
 
 For most application code, the higher-level `fetch()` global (available
 built-in since Node.js 18) is simpler than `http.request` for one-shot

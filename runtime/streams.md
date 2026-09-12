@@ -31,6 +31,7 @@ events as fast as it arrives) and **paused** (pulled explicitly via
 readable.on('data', (chunk) => process(chunk));
 readable.on('end', () => console.log('done'));
 ```
+*Full source: [readable-stream-data-event.js](/assets/code/runtime/readable-stream-data-event.js)*
 
 # Piping and backpressure
 
@@ -49,6 +50,7 @@ await pipeline(
   fs.createWriteStream('input.txt.gz'),
 );
 ```
+*Full source: [pipeline-gzip-example.js](/assets/code/runtime/pipeline-gzip-example.js)*
 
 `pipeline` (over raw `.pipe()`) is the recommended way to connect streams:
 it forwards errors from any stage and guarantees every stream in the chain

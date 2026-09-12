@@ -39,6 +39,7 @@ follows semver correctly.
 ```json
 { "engines": { "node": ">=20.0.0" } }
 ```
+*Full source: [semver-engines-field.json](/assets/code/packaging/semver-engines-field.json)*
 
 Declares which Node.js versions a package supports. npm only warns (does
 not block) on an `engines` mismatch by default; see

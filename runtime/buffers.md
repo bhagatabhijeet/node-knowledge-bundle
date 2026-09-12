@@ -23,6 +23,7 @@ Buffer.allocUnsafe(10);      // 10 uninitialized bytes — faster, may contain o
 Buffer.from('hello', 'utf8');// from a string, given an encoding
 Buffer.from([1, 2, 3]);      // from an array of bytes
 ```
+*Full source: [buffer-creation.js](/assets/code/runtime/buffer-creation.js)*
 
 `allocUnsafe` skips zero-filling for performance, but the returned memory
 may contain leftover data from previous allocations. Only use it when the
@@ -41,6 +42,7 @@ const buf = Buffer.from('café', 'utf8'); // 5 bytes: 'é' is 2 bytes in UTF-8
 buf.toString('utf8');                    // 'café'
 buf.toString('hex');                     // '636166c3a9'
 ```
+*Full source: [buffer-encoding-conversion.js](/assets/code/runtime/buffer-encoding-conversion.js)*
 
 Slicing a multi-byte character in half (e.g. via `buf.slice()` at the wrong
 offset, or reassembling chunked stream data naively) produces corrupted
@@ -52,6 +54,7 @@ text — `Buffer.concat` on whole chunks before decoding avoids this.
 Buffer.from('a').equals(Buffer.from('a')); // true, content comparison
 Buffer.compare(bufA, bufB);                // -1, 0, or 1 — for sorting
 ```
+*Full source: [buffer-comparison.js](/assets/code/runtime/buffer-comparison.js)*
 
 Never use `===` between two distinct `Buffer` instances to compare content;
 it compares object identity, not bytes.

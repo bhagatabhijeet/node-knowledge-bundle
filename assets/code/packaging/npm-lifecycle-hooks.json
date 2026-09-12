@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc -p .",
+    "postbuild": "node scripts/copy-assets.js"
+  }
+}
