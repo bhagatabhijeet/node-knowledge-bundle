@@ -116,6 +116,26 @@ const path = require('node:path');
 
 This makes it clear that the module is a Node.js core module, avoids ambiguity with npm packages, and matches the modern recommendation.
 
+## Memory aid: “F-P-H-E-S-T-U-O-P-C-T-D-Z”
+
+A quick mnemonic for the most common built-ins is:
+
+> File system, Path, HTTP, Events, Stream, Timers, URL, OS, Process, Console, Timers, Diagnostics, Zlib
+
+Or in shorter form:
+
+> “F-P-H-E-S-T-U-O-P-C-T-D-Z”
+
+Use it as a cue to remember the modules you reach for most often:
+
+- `fs` and `path`
+- `http` and `https`
+- `events` and `stream`
+- `timers`, `url`, `os`, `process`
+- `console`, `crypto`, `timers`, `diagnostics_channel`, `zlib`
+
+The point is not to memorize every single core module perfectly; it is to remember the main clusters: filesystem, networking, eventing, streams, runtime, and utilities.
+
 ## Related
 
 * [api/index.md](../api/index.md) — The main API reference section for Node.js built-ins
