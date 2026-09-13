@@ -1,6 +1,7 @@
 # Bundle Update Log
 
 ## 2026-09-12
+* **Update**: Added [Loading a module](/module-system/loading-a-module.md), the fifth and final doc in the module-system topic — `require()`, why `const` beats `var` for the result, and exporting a single function instead of an object — sourced from a walkthrough video, with a note on `require()` coexisting with ES6 `import`/`export`.
 * **Update**: Bundle-wide quality pass — every concept doc now ends with a `# Remember` callout distilling its sharpest point, 14 new short code snippets were added where prose alone was thin, and 5 new hand-authored diagrams (event loop phases, streams backpressure, semver caret-vs-tilde, the LTS timeline, and a healthy-vs-leaking memory chart) were embedded across `runtime/`, `api/`, `packaging/`, and `playbooks/`.
 * **Update**: Added [Creating a module](/module-system/creating-a-module.md) to the module-system topic — writing a private module function and exposing it with `module.exports` — sourced from a walkthrough video.
 * **Update**: Added [Modules](/module-system/modules.md) to the module-system topic — why every file is its own module, and what the `module` object contains — sourced from a walkthrough video, plus a hand-authored module-scope diagram.
