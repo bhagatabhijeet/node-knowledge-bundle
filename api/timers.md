@@ -10,6 +10,8 @@ generated: { by: reference_agent/claude-sonnet-5, at: 2026-09-12T00:00:00Z }
 
 # The four scheduling primitives
 
+![The event loop cycles through timers, pending callbacks, poll, check, and close callbacks; microtasks drain fully between every single callback](/assets/images/event-loop-phases.svg)
+
 | Function                  | Runs                                                              |
 |----------------------------|--------------------------------------------------------------------|
 | `process.nextTick(fn)`     | Before the event loop continues to anything else — a microtask, not a phase. |
@@ -58,6 +60,24 @@ right after `poll` (I/O), while `timers` only comes around on the next
 loop iteration. Outside of an I/O callback (e.g. at the top level of a
 script), the relative order between the two is not guaranteed. Use
 `setImmediate` when you specifically want "after I/O, this iteration."
+
+```js
+const fs = require('node:fs');
+
+fs.readFile(__filename, () => {
+  setTimeout(() => console.log('timeout'), 0);
+  setImmediate(() => console.log('immediate')); // logs first — same iteration
+});
+```
+*Full source: [timers-immediate-vs-timeout-io.js](/assets/code/api/timers-immediate-vs-timeout-io.js)*
+
+# Remember
+
+**Remember:** inside an I/O callback, `setImmediate` always wins the race
+against `setTimeout(fn, 0)`, because the `check` phase runs right after
+`poll`, while `timers` has to wait for the next full loop iteration — but
+that guarantee evaporates outside an I/O callback, so never rely on it at
+a script's top level.
 
 # Related
 

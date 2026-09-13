@@ -58,6 +58,15 @@ package (Node.js enforces this as "package exports encapsulation").
 - CommonJS cannot `require()` a pure ESM module synchronously (ESM linking
   is asynchronous). It must use the dynamic `import()` expression, which
   returns a promise.
+
+  ```js
+  // inside a CommonJS file (no "type": "module" in package.json)
+  async function loadEsmDependency() {
+    const { default: esmThing } = await import('./esm-only-package.mjs');
+    return esmThing;
+  }
+  ```
+  *Full source: [commonjs-dynamic-import.js](/assets/code/runtime/commonjs-dynamic-import.js)*
 - `require(esm)` support exists in newer Node.js versions for synchronous,
   non-top-level-await ESM graphs, but is not a full substitute for
   `import()` when the graph uses top-level `await`.
@@ -71,6 +80,14 @@ package (Node.js enforces this as "package exports encapsulation").
 - `node:` prefixed specifiers (`node:fs`, `node:path`) always resolve to a
   built-in module, bypassing `node_modules` entirely; this is the
   recommended way to reference built-ins.
+
+# Remember
+
+**Remember:** the file extension always overrides everything else —
+`.mjs` is ESM and `.cjs` is CommonJS no matter what `package.json` says —
+and once a package declares `exports`, any file path not listed there
+simply cannot be imported from outside, even if it's sitting right there
+in the file tree.
 
 # Related
 

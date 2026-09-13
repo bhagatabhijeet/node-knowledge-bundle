@@ -61,6 +61,24 @@ directory. Validate the resolved path stays within the expected root
 (e.g. check it starts with `path.resolve(baseDir)`) before passing it to
 [fs](fs.md).
 
+```js
+const resolved = path.resolve(baseDir, userInput);
+if (!resolved.startsWith(path.resolve(baseDir) + path.sep)) {
+  throw new Error('Path traversal attempt blocked');
+}
+```
+*Full source: [path-validate-base-dir.js](/assets/code/api/path-validate-base-dir.js)*
+
+# Remember
+
+**Remember:** `path.join('a', 'b')` never looks at your current working
+directory, but `path.resolve('a', 'b')` silently anchors to
+`process.cwd()` the moment the first segment is relative — that mismatch
+is why a script can behave differently depending on where it's launched
+from, and why any path built from user input needs an explicit check
+that it still starts with `path.resolve(baseDir)` before it reaches
+[fs](fs.md).
+
 # Related
 
 * [fs](fs.md) — the primary consumer of `path` output.

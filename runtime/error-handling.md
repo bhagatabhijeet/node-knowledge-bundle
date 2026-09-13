@@ -26,6 +26,19 @@ A useful distinction for deciding *where* to handle an error:[^joyent-errors]
   to let the process crash and restart under a supervisor, since
   continuing risks running with corrupted state.
 
+```js
+// Operational: expected, recoverable -- handle it locally
+fs.readFile('config.json', (err, data) => {
+  if (err) return useDefaultConfig(); // e.g. ENOENT -- expected sometimes
+});
+
+// Programmer: a bug -- don't try to recover, let it crash
+function getUserName(id) {
+  return users[id].name; // throws if `id` isn't in `users` -- broken invariant
+}
+```
+*Full source: [operational-vs-programmer-error.js](/assets/code/runtime/operational-vs-programmer-error.js)*
+
 [^joyent-errors]: Joyent: Error Handling in Node.js
 
 # Synchronous errors
@@ -82,6 +95,14 @@ class NotFoundError extends Error {
 }
 ```
 *Full source: [custom-error-class.js](/assets/code/runtime/custom-error-class.js)*
+
+# Remember
+
+**Remember:** a failed network request and a null-pointer bug are not the
+same kind of error — operational errors get handled right where they
+happen, but a programmer error means your process's state can no longer
+be trusted, so the correct move is to log it and let the process die and
+restart under a supervisor, not to catch it and keep serving requests.
 
 # Related
 

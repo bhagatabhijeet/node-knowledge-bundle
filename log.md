@@ -1,6 +1,7 @@
 # Bundle Update Log
 
 ## 2026-09-12
+* **Update**: Bundle-wide quality pass — every concept doc now ends with a `# Remember` callout distilling its sharpest point, 14 new short code snippets were added where prose alone was thin, and 5 new hand-authored diagrams (event loop phases, streams backpressure, semver caret-vs-tilde, the LTS timeline, and a healthy-vs-leaking memory chart) were embedded across `runtime/`, `api/`, `packaging/`, and `playbooks/`.
 * **Update**: Added [Creating a module](/module-system/creating-a-module.md) to the module-system topic — writing a private module function and exposing it with `module.exports` — sourced from a walkthrough video.
 * **Update**: Added [Modules](/module-system/modules.md) to the module-system topic — why every file is its own module, and what the `module` object contains — sourced from a walkthrough video, plus a hand-authored module-scope diagram.
 * **Creation**: Established the [module-system](/module-system/index.md) topic — [Introduction](/module-system/introduction.md) and [The global object](/module-system/global-object.md) — sourced from walkthrough videos.

@@ -61,6 +61,14 @@ listener leak rather than a real need for more listeners.
 `emitter.setMaxListeners(n)` raises the threshold when a higher count is
 genuinely expected (e.g. a shared event bus with many subscribers).
 
+# Remember
+
+**Remember:** every event name is forgiving except `'error'` — emit it
+with no listener attached and Node doesn't shrug, it throws and crashes
+the process, so any long-lived emitter (a socket, a stream, a background
+job) needs an `.on('error', ...)` handler wired up before it can ever
+fail safely.
+
 # Related
 
 * [Streams](/runtime/streams.md) — the most common `EventEmitter` subclass

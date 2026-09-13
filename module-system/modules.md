@@ -91,6 +91,22 @@ including the `exports` shorthand, and loading Node's own built-in
 modules like `os` or `events` the same way — is covered in depth in
 [Modules](/runtime/modules.md).
 
+> **Note:** `require()`/`module.exports` is Node's original module system
+> (CommonJS). It's still fully supported and everywhere in existing code,
+> but it isn't the only one anymore: ES2015 (ES6) standardized `import`/
+> `export` as JavaScript's own module syntax, and Node.js supports that
+> too. Neither replaced the other — see [Modules](/runtime/modules.md) for
+> how the two compare, interoperate, and how Node decides which one a
+> given file is using.
+
+# Remember
+
+**Remember:** `module` feels global because it's available unprefixed in
+every file, but it isn't one — `global.module` comes back `undefined`,
+just like `global.message` did. Each file gets its own private `module`
+object, and that empty `exports: {}` sitting on it is the only sanctioned
+door out of a module's otherwise private scope.
+
 # Related
 
 * [The global object](global-object.md) — the previous doc in this topic;

@@ -85,6 +85,24 @@ never touches the shared `global` object, which also means no other
 file can see it — a second file sitting right next to `app.js` has no
 way to reach `message` either, unless `app.js` explicitly exports it.
 
+# Opting in: assigning to `global` directly
+
+There's still a way to make something show up on `global` — just not by
+accident. Assigning to it explicitly does exactly what a bare `var`
+declaration doesn't:
+
+```js
+global.appName = 'MyApp';
+
+console.log(global.appName); // 'MyApp' — visible from every file
+```
+*Full source: [global-explicit-share.js](/assets/code/module-system/global-explicit-share.js)*
+
+Because this now behaves like `window` in a browser — reachable from
+anywhere — it reintroduces the exact naming-collision risk module
+scoping exists to avoid, so it's normally reserved for rare cases (test
+setup, polyfills) rather than everyday sharing between files.
+
 # Why: every file is its own module
 
 This isn't a quirk — it's Node's module system. Every `.js` file Node.js
@@ -96,6 +114,14 @@ kind of naming collision and hidden coupling module scoping avoids. See
 [Modules](/runtime/modules.md) for how CommonJS and ESM implement that
 per-file scope, and how a module opts something into being shared via
 `module.exports` / `export`.
+
+# Remember
+
+**Remember:** `console` and `setTimeout` sit right there on `global`,
+which makes it tempting to assume a top-level `var` joins them the way it
+would join `window` in a browser — it doesn't. Every file is its own
+module, so `global.message` comes back `undefined` even one line after
+you declared `var message` right above it.
 
 # Related
 

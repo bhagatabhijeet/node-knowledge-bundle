@@ -13,6 +13,8 @@ Resident memory (RSS) climbs steadily under steady-state load instead of
 plateauing, eventually triggering an out-of-memory restart or hitting the
 `--max-old-space-size` heap limit.
 
+![Two charts: a healthy process's memory saw-tooths back to the same baseline after every GC pass, while a leaking process's baseline keeps climbing](/assets/images/memory-leak-pattern.svg)
+
 # Common sources
 
 - **Growing caches** with no eviction policy or size cap (a plain `Map`
@@ -20,6 +22,14 @@ plateauing, eventually triggering an out-of-memory restart or hitting the
 - **Listener leaks**: subscribing a short-lived object to a long-lived
   [`EventEmitter`](/api/events.md) and never unsubscribing — see
   events.md's max-listeners warning as an early signal.
+
+  ```js
+  // Leak: a new listener piles up on every request, none ever removed
+  function handleRequest(req) {
+    longLivedEmitter.on('data', (chunk) => req.socket.write(chunk));
+  }
+  ```
+  *Full source: [listener-leak-example.js](/assets/code/playbooks/listener-leak-example.js)*
 - **Closures over large objects** kept alive by a long-lived timer or
   callback (e.g. a `setInterval` closing over a large buffer that is never
   needed again).
@@ -55,6 +65,14 @@ plateauing, eventually triggering an out-of-memory restart or hitting the
 5. **Fix and verify** with an eviction policy (LRU cap, TTL), an explicit
    `removeListener`/`off` on teardown, or clearing timers
    ([`clearInterval`](/api/timers.md)) that are no longer needed.
+
+# Remember
+
+**Remember:** don't chase a leak by staring at one snapshot — take two,
+several minutes apart under load, and let DevTools' Comparison view show
+you which object type keeps growing without a matching drop. That count,
+plus its retainer tree, points straight at the cache, listener, or
+closure that's holding on when it shouldn't be.
 
 # Related
 

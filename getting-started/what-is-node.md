@@ -50,6 +50,15 @@ others. A few things make Node.js a distinct choice:
   so teams can focus on the application's actual logic instead of
   reimplementing common infrastructure from scratch.
 
+# Remember
+
+**Remember:** Node.js is the same runtime whether you're prototyping a
+throwaway script or running PayPal's production traffic — when PayPal
+rebuilt a Java/Spring service on Node, they shipped roughly twice as fast
+with about a third less code and ended up handling double the requests
+per second at noticeably lower latency. That's the whole pitch in one
+data point: Node scales up, it isn't something you outgrow.
+
 # Related
 
 * [Node.js architecture](node-architecture.md) — how Node.js is built

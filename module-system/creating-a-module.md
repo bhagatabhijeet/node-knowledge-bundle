@@ -96,7 +96,22 @@ anything on its own — a module only earns its keep once something
 `require()`s it. That's the other half of the mechanic this doc set up
 for: pulling `logger.js` into `app.js` by its relative path, along with
 the `exports` shorthand and loading Node's own built-in modules like `os`
-the same way, is covered in depth in [Modules](/runtime/modules.md).
+the same way, is covered in depth in [Modules](/runtime/modules.md) — see
+[Loading a module](loading-a-module.md) for that require() step itself.
+
+> **Note:** `require()` is Node's original (CommonJS) way to load a
+> module. ES2015 (ES6) later standardized `import`/`export` as
+> JavaScript's own module syntax, which Node also supports — `require()`
+> wasn't replaced or deprecated by it, the two just coexist. See
+> [Modules](/runtime/modules.md) for how they compare and interoperate.
+
+# Remember
+
+**Remember:** `module.exports.log = log` doesn't just share a function —
+it draws the line between a module's public face and its private guts,
+and the two names don't even have to match. Think of it like a DVD
+player: expose the buttons callers actually need (`log`), and leave the
+wiring (`url`) sealed inside the case where nothing outside can reach it.
 
 # Related
 

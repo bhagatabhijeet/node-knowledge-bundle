@@ -30,6 +30,14 @@ what a module is, why that isolation exists, and how to work with it:
   shared global scope. The mechanics of that — `require`, `module.exports`,
   `import`/`export` — are covered in [Modules](/runtime/modules.md).
 
+# Remember
+
+**Remember:** every doc in this topic traces back to one design choice —
+Node treats each file as its own private module instead of sharing one
+global scope the way browser `<script>` tags do. That single decision is
+the reason `require`, `module.exports`, and per-file scoping have to
+exist at all.
+
 # Related
 
 * [The global object](global-object.md) — the next doc in this topic.

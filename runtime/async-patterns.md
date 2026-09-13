@@ -51,6 +51,16 @@ readFile('/etc/hosts', 'utf8')
 for every promise, never rejects), and `Promise.race` combine multiple
 promises for concurrent work.
 
+```js
+// Serial: ~300ms total -- each await waits for the previous one to finish
+const a = await fetchA();
+const b = await fetchB();
+
+// Concurrent: ~100ms total -- both requests run at the same time
+const [x, y] = await Promise.all([fetchA(), fetchB()]);
+```
+*Full source: [promise-all-vs-sequential-await.js](/assets/code/runtime/promise-all-vs-sequential-await.js)*
+
 # async/await
 
 Syntactic sugar over promises that lets asynchronous code read like
@@ -83,6 +93,14 @@ promise is pending.
 - An unhandled promise rejection terminates the process by default (see
   [error handling](error-handling.md)); always attach a `.catch` or
   `try`/`catch` on every promise chain that can reject.
+
+# Remember
+
+**Remember:** callbacks, promises, and async/await are the same event loop
+wearing three different outfits — the real decision that changes behavior
+is `Promise.all` (dies on the first rejection) versus `Promise.allSettled`
+(always waits for everyone), and forgetting a `.catch` anywhere in the
+chain will now crash your process, not just log a warning.
 
 # Related
 

@@ -23,6 +23,8 @@ LTS. An LTS line moves through three stages:
 | Maintenance LTS   | Critical bug fixes and security patches only, no new features.    |
 | End-of-life (EOL) | No further updates of any kind; upgrade is overdue.                |
 
+![Timeline: Current (~6 months), then Active LTS, then Maintenance LTS, then EOL, spanning roughly 30 months total](/assets/images/node-lts-timeline.svg)
+
 Each LTS line gets roughly 30 months of combined Active + Maintenance
 support from its initial release. Always check the authoritative,
 continuously updated schedule rather than a hardcoded date, since exact
@@ -53,6 +55,13 @@ npm only warns on an `engines` mismatch by default; combine it with a
 `.nvmrc` (for `nvm`/`fnm` users) and a CI check
 (`node -e "process.exit(require('semver').satisfies(process.version, require('./package.json').engines.node) ? 0 : 1)"`)
 if the constraint must be enforced rather than advisory.
+
+# Remember
+
+**Remember:** only the *even*-numbered majors (18, 20, 22, 24...) ever
+become LTS — odd ones (19, 21, 23...) are Current-only and will never
+get long-term support, so shipping an odd major to production isn't a
+head start, it's a guaranteed forced upgrade later.
 
 # Related
 

@@ -20,6 +20,8 @@ corresponding JavaScript callback.
 Each iteration of the loop runs through a fixed set of phases, each holding
 its own callback queue:
 
+![The event loop cycles through timers, pending callbacks, poll, check, and close callbacks; microtasks drain fully between every single callback](/assets/images/event-loop-phases.svg)
+
 | Phase              | Executes                                                        |
 |--------------------|------------------------------------------------------------------|
 | `timers`           | Callbacks scheduled by [`setTimeout`/`setInterval`](/api/timers.md) whose threshold has elapsed. |
@@ -64,9 +66,31 @@ not guaranteed since both race against timer resolution).
 Because JavaScript execution is single-threaded, a long synchronous
 computation (a tight loop, `JSON.parse` on a huge string, synchronous
 crypto) blocks every other callback, timer, and incoming request until it
-finishes. See [error handling](error-handling.md) and
+finishes.
+
+```js
+setTimeout(() => console.log('timer fired'), 0);
+
+const start = Date.now();
+while (Date.now() - start < 3000) {} // blocks everything for 3s
+
+console.log('main thread finally free');
+```
+*Full source: [event-loop-blocking-example.js](/assets/code/runtime/event-loop-blocking-example.js)*
+
+The timer callback registered above cannot run until the synchronous
+`while` loop finishes, even though its delay was `0`. See
+[error handling](error-handling.md) and
 [profiling performance](/playbooks/profiling-performance.md) for how to
 find and avoid this in practice.
+
+# Remember
+
+**Remember:** Node drains *every* pending `process.nextTick` and promise
+callback before moving on — not just between phases, but between every
+single callback — so a chain that keeps re-scheduling itself can starve
+timers and I/O indefinitely; that's also why `nextTick` beats
+`Promise.then`, which beats `setTimeout(0)`, in the classic ordering test.
 
 # Related
 

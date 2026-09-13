@@ -86,6 +86,15 @@ foundation rather than part of the engine itself; see
 [the event loop](/runtime/event-loop.md) for how that scheduling
 actually works.
 
+# Remember
+
+**Remember:** Node.js is just Chrome's V8 engine unplugged from the
+browser and dropped into a C++ program with a different set of globals —
+no `window`, no `document`, but direct file-system and network access
+instead. It's neither a programming language (comparing it to C# or Ruby
+is comparing a runtime to a language) nor a framework (Express and NestJS
+sit *on top of* Node, they aren't alternatives to it).
+
 # Related
 
 * [What is Node.js?](what-is-node.md) — what Node.js is used for and why

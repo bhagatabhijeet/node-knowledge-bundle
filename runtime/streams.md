@@ -35,6 +35,8 @@ readable.on('end', () => console.log('done'));
 
 # Piping and backpressure
 
+![A fast Readable filling a Writable's internal buffer; pipe() pauses the Readable when the buffer is full and resumes it on 'drain'](/assets/images/streams-backpressure.svg)
+
 `.pipe()` connects a readable to a writable and automatically manages
 **backpressure**: if the writable's internal buffer fills up faster than it
 can drain (e.g. writing to a slow disk while reading from a fast network
@@ -63,6 +65,26 @@ By default, streams operate on `Buffer`/string chunks. `{ objectMode: true }`
 lets a stream carry arbitrary JavaScript values instead — useful for
 building processing pipelines over structured records rather than raw
 bytes.
+
+```js
+const { Transform } = require('node:stream');
+
+const toUpperCaseName = new Transform({
+  objectMode: true,
+  transform(record, _enc, callback) {
+    callback(null, { ...record, name: record.name.toUpperCase() });
+  },
+});
+```
+*Full source: [object-mode-transform-stream.js](/assets/code/runtime/object-mode-transform-stream.js)*
+
+# Remember
+
+**Remember:** raw `.pipe()` will quietly leave dangling streams and
+unclosed file descriptors behind if one stage errors out — `pipeline()`
+is the version that guarantees every stream in the chain gets destroyed
+and every error gets forwarded, which is exactly what turns backpressure
+from a manual chore into something automatic.
 
 # Related
 

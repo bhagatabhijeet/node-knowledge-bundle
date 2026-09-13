@@ -73,6 +73,13 @@ each workspace package into the root `node_modules`. `npm run build
 --workspaces` runs a script across every workspace; `npm run build -w
 packages/api` targets one.
 
+# Remember
+
+**Remember:** `pre<name>`/`post<name>` isn't a fixed list of npm
+shortcuts — it's a naming convention npm honors for *any* script, so
+`prebuild`/`postbuild` (or `predeploy`, `postinstall`, anything you make
+up) runs automatically around `npm run <name>` with zero extra wiring.
+
 # Related
 
 * [package.json](package-json.md) — where `scripts` and `workspaces` are

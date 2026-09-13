@@ -63,6 +63,15 @@ CPU-bound work within the same process instead of a separate one, see the
 `worker_threads` module (lighter-weight, shared-memory-capable, but not
 covered in this bundle).
 
+# Remember
+
+**Remember:** `exec(`cat ${filename}`)` with unsanitized input is a
+shell-injection vulnerability, not a hypothetical one — `exec` hands your
+whole string to a shell to interpret, while `spawn`/`execFile` take the
+command and its arguments as separate values and never invoke a shell at
+all, so the moment any part of a command comes from outside your code,
+that's the pair to reach for.
+
 # Related
 
 * [Process](/runtime/process.md) — signals sent between parent and child.

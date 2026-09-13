@@ -57,6 +57,26 @@ machines and time. Always commit the lockfile for applications;
 libraries typically commit it too, for reproducible CI, even though
 consumers resolve their own ranges.
 
+The `"zod": "^3.23.0"` range above resolves to one exact, pinned entry
+in the lockfile:
+
+```json
+{
+  "node_modules/zod": {
+    "version": "3.23.4",
+    "resolved": "https://registry.npmjs.org/zod/-/zod-3.23.4.tgz"
+  }
+}
+```
+*Full source: [package-json-lockfile-entry.json](/assets/code/packaging/package-json-lockfile-entry.json)*
+
+# Remember
+
+**Remember:** `package.json` only ever declares dependency *ranges* —
+the exact versions your build actually gets come from the lockfile, so
+if you don't commit `package-lock.json`, "reproducible build" is just a
+hope, not a guarantee.
+
 # Related
 
 * [Modules](/runtime/modules.md) — `type` and `exports` in depth.

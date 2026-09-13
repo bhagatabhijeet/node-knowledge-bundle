@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "express": "~4.19.2"
+  }
+}

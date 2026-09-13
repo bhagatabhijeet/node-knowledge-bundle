@@ -73,6 +73,19 @@ thread to handle *all* incoming requests:
    a pending event, it picks it up and processes it — resuming whatever
    response the result belongs to.
 
+In code, the blocking/non-blocking contrast looks like this:
+
+```js
+const fs = require('fs');
+
+const data = fs.readFileSync('notes.txt', 'utf8'); // blocks here
+
+fs.readFile('notes.txt', 'utf8', (err, data) => {
+  console.log(data); // runs later; the thread was free meanwhile
+});
+```
+*Full source: [blocking-vs-non-blocking.js](/assets/code/getting-started/blocking-vs-non-blocking.js)*
+
 This is the same hand-off described at the mechanical level in
 [the event loop](/runtime/event-loop.md): the single JavaScript thread
 never blocks on I/O, because libuv is doing the actual waiting and
@@ -100,6 +113,15 @@ the thread can get to them.
 
 The practical guideline: Node.js should be used for data-intensive,
 real-time applications, and avoided for CPU-intensive ones.
+
+# Remember
+
+**Remember:** Node's superpower and its one weakness come from the same
+fact — a single thread that never waits on I/O scales beautifully under
+database and network load, but that same single thread has nowhere to
+hide from CPU-heavy work. One long calculation (video encoding, image
+processing) freezes it completely, and every other client just has to
+wait their turn.
 
 # Related
 

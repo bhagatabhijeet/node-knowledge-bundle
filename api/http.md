@@ -69,6 +69,23 @@ requests. The default global agent keeps sockets open for reuse; under
 high concurrency, tune `maxSockets` or supply a custom agent to avoid
 exhausting file descriptors or hitting a remote host's connection limits.
 
+```js
+const { Agent, get } = require('node:http');
+
+const agent = new Agent({ keepAlive: true, maxSockets: 50 });
+get('http://example.com', { agent }, (res) => { /* reuses pooled sockets */ });
+```
+*Full source: [http-custom-agent.js](/assets/code/api/http-custom-agent.js)*
+
+# Remember
+
+**Remember:** the raw `http` module never hands you `req.body` — both
+`req` and `res` are plain streams, so reading JSON means manually
+collecting `'data'` chunks until `'end'` fires; that's exactly the gap
+frameworks like Express fill for you, and it's why an outbound request
+needs its own `req.on('error', ...)` listener or network failures never
+surface at all.
+
 # Related
 
 * [Streams](/runtime/streams.md) — both `req` and `res` are streams.

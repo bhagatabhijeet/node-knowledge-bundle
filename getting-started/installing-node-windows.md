@@ -68,6 +68,15 @@ Both should now report the version you just installed. From inside a
 running Node.js program, the same information is available as
 [`process.version`](/runtime/process.md), without shelling out.
 
+# Remember
+
+**Remember:** grab **LTS**, not Current, unless you have a specific
+reason not to — it's the build recommended for most users. And if
+`node --version` still reports the old number right after you finish the
+installer, you're almost certainly looking at a Command Prompt window
+that was already open before install; close it and open a fresh one so it
+picks up the updated `PATH`.
+
 # Related
 
 * [Choosing a Node.js version](/playbooks/choosing-a-node-version.md) —

@@ -67,6 +67,14 @@ request graceful shutdown before escalating to `SIGKILL` (which cannot be
 caught). A process that does not handle `SIGTERM` and close its own
 listeners/connections risks being force-killed mid-request.
 
+# Remember
+
+**Remember:** calling `process.exit()` directly can cut off an in-flight,
+unflushed write mid-stream — setting `process.exitCode` and letting the
+loop drain naturally is the safe way to exit — and only `SIGTERM` gives
+your code a chance to shut down gracefully, because `SIGKILL` can never
+be caught, ever.
+
 # Related
 
 * [Error handling](error-handling.md) — `uncaughtException` and

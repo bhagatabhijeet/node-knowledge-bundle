@@ -47,7 +47,15 @@ run this playbook when memory is stable but throughput or latency is not.
      (visible as recurring `(garbage collector)` frames).
    - `JSON.parse`/`JSON.stringify` on large payloads on the hot path.
    - Synchronous [fs](/api/fs.md) calls (`readFileSync`, etc.) in a
-     request handler.
+     request handler:
+
+     ```js
+     app.get('/report', (req, res) => {
+       const raw = fs.readFileSync('./huge-report.json'); // blocks the loop
+       res.json(JSON.parse(raw));
+     });
+     ```
+     *Full source: [sync-fs-in-handler.js](/assets/code/playbooks/sync-fs-in-handler.js)*
 
 5. **Fix, then re-profile** under the same load to confirm the hot frame
    shrank rather than assuming from the code change alone.
@@ -58,6 +66,14 @@ run this playbook when memory is stable but throughput or latency is not.
 underlying V8 profiler with friendlier flamegraph rendering and
 automatic diagnosis of common patterns (event-loop blocking, I/O-bound
 vs. CPU-bound), useful when the raw DevTools flamegraph is hard to read.
+
+# Remember
+
+**Remember:** read a flamegraph bottom-up and sort by Self Time, not by
+eyeballing which frame looks biggest — the widest bars at the *bottom*
+of a stack are where CPU time is actually being spent, while a frame
+higher up that merely sits on the call path can look alarming and cost
+almost nothing.
 
 # Related
 

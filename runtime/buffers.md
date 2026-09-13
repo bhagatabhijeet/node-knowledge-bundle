@@ -59,6 +59,14 @@ Buffer.compare(bufA, bufB);                // -1, 0, or 1 — for sorting
 Never use `===` between two distinct `Buffer` instances to compare content;
 it compares object identity, not bytes.
 
+# Remember
+
+**Remember:** `Buffer.allocUnsafe` hands you real leftover bytes from
+somewhere earlier in the process's memory, not zeros — safe only if you
+overwrite every byte before anything reads it back — and two buffers
+holding identical bytes are still two different objects, so `===` will
+lie to you; reach for `.equals()` instead.
+
 # Related
 
 * [Streams](streams.md) — the default chunk type in non-object-mode streams.

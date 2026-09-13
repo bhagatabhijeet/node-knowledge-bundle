@@ -76,6 +76,15 @@ place, Node.js provides objects for working with the file system, the
 operating system, and the network — covered under
 [API reference](/api/index.md).
 
+# Remember
+
+**Remember:** that first `ReferenceError: window is not defined` isn't a
+mistake to fix — it's proof of the architecture. `node app.js` runs on
+the exact same V8 engine that would run the same code inside Chrome; the
+error only happens because Node pairs that engine with a runtime
+environment that has no page to represent, so browser-only globals like
+`window` simply were never added.
+
 # Related
 
 * [What is Node.js?](what-is-node.md) — why Node's runtime environment

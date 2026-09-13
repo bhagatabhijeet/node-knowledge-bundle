@@ -60,6 +60,15 @@ descriptor number — but never construct those paths with unsanitized user
 input without validating against directory traversal (`../`); see
 [path](path.md) for safe path construction.
 
+# Remember
+
+**Remember:** the same `fs` operation comes in three shapes — callback,
+sync, and promise — and picking the wrong one is how a request handler
+quietly stalls every other in-flight request: `readFileSync` blocks the
+[event loop](/runtime/event-loop.md) for everyone, not just the caller,
+so save sync calls for startup code and reach for `node:fs/promises`
+everywhere else.
+
 # Related
 
 * [path](path.md) — building the path strings passed to `fs`.
