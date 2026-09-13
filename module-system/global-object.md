@@ -79,9 +79,11 @@ console.log(global.message); // undefined
 
 ![VS Code showing var message = ''; console.log(global.message); as the only two lines in app.js](/assets/images/global-object-message-undefined.png)
 
-Running this prints `undefined`, not `''`. The variable exists, but only
-within the file that declared it — it never touches the shared `global`
-object at all.
+Running this in `app.js` prints `undefined`, not `''`. `message` exists,
+but it's **file-scoped**: it belongs to `app.js` and only `app.js`. It
+never touches the shared `global` object, which also means no other
+file can see it — a second file sitting right next to `app.js` has no
+way to reach `message` either, unless `app.js` explicitly exports it.
 
 # Why: every file is its own module
 
