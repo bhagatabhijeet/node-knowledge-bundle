@@ -1,7 +1,7 @@
 ---
 type: Overview
 title: The global object
-description: The globals JavaScript and Node.js provide, and why a variable declared in a file isn't one of them.
+description: Why console and the timer functions live on global but a variable you declare yourself does not.
 tags: [nodejs, module-system, globals]
 status: stable
 generated: { by: reference_agent/claude-sonnet-5, at: 2026-09-12T00:00:00Z }
@@ -11,10 +11,10 @@ sources:
     title: "The global object (walkthrough)"
 ---
 
-# JavaScript's own globals
+# Where these globals actually come from
 
-A few functions are part of the JavaScript language itself and available
-wherever JavaScript runs — in a browser or in Node.js:
+A few functions show up unprefixed wherever JavaScript runs — in a
+browser or in Node.js:
 
 - `console.log(...)` and the rest of the `console` object.
 - `setTimeout(fn, delay)` / `clearTimeout(id)` — call a function once,
@@ -22,6 +22,16 @@ wherever JavaScript runs — in a browser or in Node.js:
 - `setInterval(fn, delay)` / `clearInterval(id)` — call a function
   repeatedly on a delay, or stop it. See [timers](/api/timers.md) for the
   full set, including Node-specific additions like `setImmediate`.
+
+It's tempting to assume these are part of the JavaScript language itself,
+but they aren't. **V8** — the engine Node.js embeds (see
+[Node.js architecture](/getting-started/node-architecture.md)) — only
+implements the ECMAScript language: variables, functions, closures,
+`Promise`, and so on. `console` and the timer functions above are not in
+that spec. They exist because the **runtime environment** wrapped around
+the engine adds them — a browser adds its own version, and Node.js adds
+its own, separately implemented version. That's why both feel available
+"for free," despite neither being part of JavaScript proper.
 
 # Browser: `window`
 
@@ -42,17 +52,24 @@ prefixing it with `window.`, since that's where the object actually lives.
 
 Node.js has no `window` — there's no page for it to represent (see
 [What is Node.js?](/getting-started/what-is-node.md)). In its place,
-Node.js provides an equivalent object called `global`, which is where
-`console`, `setTimeout`, and the rest actually live. Normally there's no
-need to write the prefix — `console.log(...)` works exactly the same as
-`global.console.log(...)`.
+Node.js's runtime environment provides an equivalent object called
+`global`, and it's the actual home of `console`, `setTimeout`,
+`clearTimeout`, `setInterval`, and `clearInterval` — all four of them are
+genuine properties of `global`, added by Node itself rather than by V8.
+Normally there's no need to write the prefix — `console.log(...)` works
+exactly the same as `global.console.log(...)`, and `setTimeout(fn, 1000)`
+the same as `global.setTimeout(fn, 1000)`.
 
-# The difference that matters: file-scoped, not global
+# The essential difference: file-scoped, not global
 
-Here's where Node.js diverges from a browser in a way that matters. In a
-browser, a variable declared at the top level of a `<script>` becomes a
-property of `window`. In Node.js, a variable declared at the top level of
-a file is **not** added to `global`:
+This is the point worth calling out explicitly, because it's easy to
+assume `global` behaves exactly like `window` just because both hold
+`console` and the timer functions: **it doesn't**, for anything *you*
+declare. In a browser, a variable declared at the top level of a
+`<script>` becomes a property of `window`, right alongside the built-ins.
+In Node.js, a variable declared at the top level of a file is **not**
+added to `global` — even though `setTimeout` and friends are sitting
+right there on the same object:
 
 ```js
 var message = '';
