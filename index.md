@@ -13,6 +13,10 @@ it in production.
 
 * [getting-started/](getting-started/) - What Node.js is and how it's built, for newcomers.
 
+# Node Module System
+
+* [module-system/](module-system/) - Global objects, and how Node.js scopes and shares code across files.
+
 # Runtime
 
 * [runtime/](runtime/) - The execution model: event loop, modules, streams, buffers, processes, errors, async patterns.

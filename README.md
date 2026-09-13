@@ -26,6 +26,7 @@ read this.
 | Section | You'll learn |
 |---|---|
 | [`getting-started/`](getting-started/) | What Node.js is, and how it's built under the hood. |
+| [`module-system/`](module-system/) | Global objects, and why Node.js scopes each file as its own module. |
 | [`runtime/`](runtime/) | The event loop, modules, streams, buffers, processes, error handling, async patterns. |
 | [`api/`](api/) | The core built-ins — `fs`, `http`, `path`, `events`, `child_process`, `timers`. |
 | [`packaging/`](packaging/) | `package.json`, npm scripts, semantic versioning. |
