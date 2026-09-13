@@ -3,3 +3,4 @@
 * [Introduction](introduction.md) - What this topic covers: why modules exist, the core modules, and writing your own.
 * [The global object](global-object.md) - The globals JavaScript and Node.js provide, and why a variable declared in a file isn't one of them.
 * [Modules](modules.md) - Why every file is wrapped in its own module, and what the `module` object itself contains.
+* [Creating a module](creating-a-module.md) - Writing a real module file and choosing what to expose from it with `module.exports`.

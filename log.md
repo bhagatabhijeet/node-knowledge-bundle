@@ -1,6 +1,7 @@
 # Bundle Update Log
 
 ## 2026-09-12
+* **Update**: Added [Creating a module](/module-system/creating-a-module.md) to the module-system topic — writing a private module function and exposing it with `module.exports` — sourced from a walkthrough video.
 * **Update**: Added [Modules](/module-system/modules.md) to the module-system topic — why every file is its own module, and what the `module` object contains — sourced from a walkthrough video, plus a hand-authored module-scope diagram.
 * **Creation**: Established the [module-system](/module-system/index.md) topic — [Introduction](/module-system/introduction.md) and [The global object](/module-system/global-object.md) — sourced from walkthrough videos.
 * **Update**: Extracted every substantive inline code snippet across the bundle into `assets/code/`, mirrored by topic, with each snippet's markdown fence now followed by a `Full source` link to the real file.
