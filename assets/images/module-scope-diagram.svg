@@ -1,0 +1,31 @@
+<svg width="900" height="420" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7d4bb0"/>
+      <stop offset="100%" stop-color="#3f1f63"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5c3488"/>
+      <stop offset="100%" stop-color="#48276f"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="420" fill="url(#bg)"/>
+
+  <!-- Module 1 -->
+  <text x="150" y="55" text-anchor="middle" font-size="26" font-weight="bold" fill="#ffffff">Module 1</text>
+  <rect x="35" y="80" width="230" height="300" rx="18" fill="url(#card)" stroke="#9a6fc4" stroke-width="2"/>
+  <rect x="105" y="115" width="90" height="34" rx="8" fill="#f2c634" stroke="#ffffff" stroke-width="3"/>
+
+  <!-- Module 2 -->
+  <text x="450" y="55" text-anchor="middle" font-size="26" font-weight="bold" fill="#ffffff">Module 2</text>
+  <rect x="335" y="80" width="230" height="300" rx="18" fill="url(#card)" stroke="#9a6fc4" stroke-width="2"/>
+  <rect x="405" y="115" width="90" height="34" rx="8" fill="#f2c634" stroke="#ffffff" stroke-width="3"/>
+
+  <!-- Module 3 -->
+  <text x="750" y="55" text-anchor="middle" font-size="26" font-weight="bold" fill="#ffffff">Module 3</text>
+  <rect x="635" y="80" width="230" height="300" rx="18" fill="url(#card)" stroke="#9a6fc4" stroke-width="2"/>
+  <rect x="705" y="115" width="90" height="34" rx="8" fill="#f2c634" stroke="#ffffff" stroke-width="3"/>
+
+  <text x="450" y="405" text-anchor="middle" font-size="15" fill="#e5d4f5" font-style="italic">Each .js file is its own module, with its own private variables and functions.</text>
+</svg>
