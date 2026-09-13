@@ -116,51 +116,30 @@ const path = require('node:path');
 
 This makes it clear that the module is a Node.js core module, avoids ambiguity with npm packages, and matches the modern recommendation.
 
-## Memory aid for beginners: “Furious Pandas Hop Everywhere, Stealing Tacos, Under Overweight Penguins, Cooking Tandoori Zoodles.”
+## Memory aid for beginners: “OS path, fs, http, url, stream, tim, dns, crypto, zlib—my process console screamed while the file system marched down the path, the web URL bounced through a water stream, the timer ticked, the DNS detective found the server, the crypto magician hid the secrets, and the zlib clown squished everything into a tiny package—because that’s how all 50 built-in Node modules do their day job, and somehow it still prints to the console in one ridiculous brain-burst!”
 
-This is intentionally ridiculous, which is why it sticks:
+This one uses little fragments from real module names, like:
 
-- `fs` = Furious
-- `path` = Pandas
-- `http` = Hop
-- `events` = Everywhere
-- `stream` = Stealing
-- `timers` = Tacos
-- `url` = Under
-- `os` = Overweight
-- `process` = Penguins
-- `console` = Cooking
-- `crypto` = Tandoori
-- `dns` = Zoodles
-- `zlib` = Zoodles (yes, the same absurd ending)
+- `os` = “OS”
+- `path` = “path”
+- `fs` = “fs”
+- `http` = “http”
+- `url` = “url”
+- `stream` = “stream”
+- `tim` = `timers`
+- `dns` = “dns”
+- `crypto` = “crypto”
+- `zlib` = “zlib”
+- `process` = “process”
+- `console` = “console”
 
-Cartoon version:
+And the whole sentence is intentionally absurd so your brain remembers the structure instead of a boring list.
 
-```text
-     ┌───────┐  ┌───────┐  ┌───────┐  ┌───────┐  ┌───────┐
-     │  fs   │  │ path  │  │ http  │  │ events│  │stream │
-     └───┬───┘  └───┬───┘  └───┬───┘  └───┬───┘  └───┬───┘
-         │          │          │          │          │
-         └──────────┴──────────┴──────────┴──────────┘
-                             ↓
-                     "Furious Pandas"
-                         ↓
-                 ┌───────┐ ┌───────┐ ┌───────┐
-                 │timers │ │ url   │ │ os    │
-                 └───────┘ └───────┘ └───────┘
-                         ↓
-                 ┌───────┐ ┌───────┐ ┌───────┐
-                 │process│ │console│ │crypto │
-                 └───────┘ └───────┘ └───────┘
-                         ↓
-                     ┌───────┐ ┌───────┐
-                     │  dns  │ │  zlib │
-                     └───────┘ └───────┘
+A shorter, more punchy version:
 
-  "Furious Pandas Hop Everywhere, Stealing Tacos, Under Overweight Penguins, Cooking Tandoori Zoodles!"
-```
+> “OS path, fs, http, url, stream, tim, dns, crypto, zlib—process console says: ‘I’m a clown car full of file paths, web URLs, water streams, ticking timers, DNS detectives, crypto magicians, and zlib zombies—50 built-in modules, and I still print the whole circus!’”
 
-The lesson: if the memory sentence sounds ridiculous, your brain will keep replaying it until it sticks.
+That is the goal: weird picture + real module fragments + absurd rhythm = instant recall.
 
 ## Related
 
