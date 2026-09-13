@@ -56,6 +56,18 @@ Running `node app.js` prints `{ log: [Function: log] }` — not the whole
 hand over the module's private variables or its source, only whatever
 was deliberately exported.
 
+> **The ESM equivalent:** in a file where `import`/`export` is active
+> (see the callout above), the same pull-in is written
+> `import logger from './logger.js';` — the extension is required here,
+> unlike with `require()`. Node's CommonJS interop treats a CJS module's
+> whole `module.exports` value as the default export, so `logger` still
+> comes back as `{ log: [Function: log] }`; only the syntax for grabbing
+> it changed. See [Modules](/runtime/modules.md) for the full interop
+> rules. The `const`-vs-`var` question below doesn't even arise here:
+> `import` isn't a `var`/`let`/`const` declaration at all, so `logger` is
+> a read-only binding by construction — reassigning it is a `SyntaxError`
+> the moment the file is parsed, not a runtime mistake waiting to happen.
+
 # Calling the exported function
 
 `require()`'s return value behaves like any other object, so the
@@ -149,10 +161,12 @@ many things a module actually needs to expose.
 
 **Remember:** `require('./logger')` only ever hands back what
 `logger.js` put on `module.exports` — never its private variables, and
-never its source. And once you have that value, declare it with `const`,
-not `var`: an accidental reassignment then fails loudly, right at the
-mistake, instead of surfacing as a confusing `TypeError` several lines
-later.
+never its source; `import logger from './logger.js'` returns that same
+value. And once you have it, don't leave it reassignable with `var`: a
+`require()` result should be declared `const`, so an accidental
+reassignment fails loudly, right at the mistake, instead of surfacing as
+a confusing `TypeError` several lines later — `import` bindings skip the
+question entirely by being read-only from the start.
 
 # Related
 
