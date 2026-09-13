@@ -17,6 +17,8 @@ it in production.
 
 * [module-system/](module-system/) - Global objects, and how Node.js scopes and shares code across files.
 
+* [module-system/module-wrapper-function.md](module-system/module-wrapper-function.md) - The hidden CommonJS wrapper and the locals Node injects into every file.
+
 # Runtime
 
 * [runtime/](runtime/) - The execution model: event loop, modules, streams, buffers, processes, errors, async patterns.
