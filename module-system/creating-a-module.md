@@ -1,7 +1,7 @@
 ---
 type: Overview
 title: Creating a module
-description: Walking through writing an actual module file — a private variable and function — and choosing what to expose from it with module.exports.
+description: Walking through writing an actual module file — a private variable and function — and choosing what to expose from it with module.exports. Export patterns include objects with multiple members or a single function.
 tags: [nodejs, module-system]
 status: stable
 generated: { by: reference_agent/claude-sonnet-5, at: 2026-09-12T00:00:00Z }
@@ -53,7 +53,12 @@ every top-level declaration in `logger.js` is scoped to that file. `app.js`
 same project folder. Being in the same directory has no bearing on
 visibility; only exporting does.
 
-# Opting in with `module.exports`
+# Two export patterns
+
+Node.js supports two common export patterns, and choosing between them depends on
+how many things your module needs to expose.
+
+## Pattern 1: Export an object with named members
 
 [Modules](modules.md) showed that every file's `module` object starts
 with an empty `exports: {}`. Making something public means adding a
@@ -89,13 +94,77 @@ what callers actually need, and leave everything else — `url` included —
 private. So `url` never gets a line added for it, and `logger.js` is left
 with a single, minimal, public member: `log`.
 
+### Using the object export in `app.js`
+
+When you export an object with named members, the caller accesses them as properties:
+
+```js
+const logger = require('./logger');
+
+logger.log('message');  // Call the log method on the exported object
+```
+
+This pattern is ideal when a module needs to export **multiple functions or values**.
+
+## Pattern 2: Export a single function directly
+
+Sometimes a module's sole purpose is to provide a single function. In those cases,
+instead of wrapping the function in an object, you can replace `module.exports`
+entirely with just the function:
+
+```js
+var url = 'http://mylogger.io/log';
+
+function log(message) {
+  // Send an HTTP request
+  console.log(message);
+}
+
+module.exports = log;
+```
+*Full source: [logger-single-export.js](/assets/code/module-system/logger-single-export.js)*
+
+![VS Code showing logger.js with module.exports = log; (replacing module.exports.log = log)](/assets/images/loading-module-export-single-function.png)
+
+Instead of adding a property to `module.exports`, you're **reassigning the entire
+exports object** to the function itself. Now `require('./logger')` returns the
+function directly, not a wrapper object.
+
+### Using the single function export in `app.js`
+
+When you export a single function, the caller receives the function directly and
+can invoke it without accessing a property:
+
+```js
+const log = require('./logger');
+
+log('message');  // Call the function directly — no property access needed
+```
+
+Notice the difference: with the object pattern it's `logger.log()`, but with
+the single function pattern it's just `log()`. The result is cleaner and more
+direct.
+
+## Comparing the two patterns
+
+| Aspect | Object Export | Single Function Export |
+|--------|---|---|
+| **When to use** | Module exports 2+ functions or values | Module exports exactly 1 primary function |
+| **Pattern** | `module.exports.log = log;` | `module.exports = log;` |
+| **Caller usage** | `const logger = require('./logger');`<br>`logger.log('msg')` | `const log = require('./logger');`<br>`log('msg')` |
+| **Example modules** | `fs`, `path`, `http` (provide many APIs) | lodash utilities, single processors |
+
+Both styles are equally legitimate — the choice comes down to how many things
+your module actually needs to expose. Use whichever pattern matches the module's
+purpose.
+
 # What's next: loading it from `app.js`
 
 `logger.js` is a complete module at this point, but it isn't doing
 anything on its own — a module only earns its keep once something
 `require()`s it. That's the other half of the mechanic this doc set up
-for: pulling `logger.js` into `app.js` by its relative path, along with
-the `exports` shorthand and loading Node's own built-in modules like `os`
+for: pulling `logger.js` into `app.js` by its relative path, the export
+patterns covered here, and loading Node's own built-in modules like `os`
 the same way, is covered in depth in [Modules](/runtime/modules.md) — see
 [Loading a module](loading-a-module.md) for that require() step itself.
 
@@ -107,17 +176,21 @@ the same way, is covered in depth in [Modules](/runtime/modules.md) — see
 
 # Remember
 
-**Remember:** `module.exports.log = log` doesn't just share a function —
-it draws the line between a module's public face and its private guts,
-and the two names don't even have to match. Think of it like a DVD
-player: expose the buttons callers actually need (`log`), and leave the
-wiring (`url`) sealed inside the case where nothing outside can reach it.
+**Remember:** You have two main export patterns:
+1. **Named members on an object**: `module.exports.log = log;` — Use when your module provides multiple functions or values. The caller accesses them as properties: `logger.log()`.
+2. **Single function**: `module.exports = log;` — Use when your module's sole purpose is to provide one primary function. The caller invokes it directly: `log()`.
+
+In both cases, you're drawing the line between a module's public face and its private
+implementation. Keep your exports minimal — expose only what callers need, and leave
+everything else (like the private `url` variable) sealed inside.
 
 # Related
 
 * [Modules](modules.md) — the previous doc in this topic; explains why
   `logger.js`'s declarations are private by default and what `module`
   looks like before anything is exported.
+* [Loading a module](loading-a-module.md) — the next doc in this topic; shows how
+  to `require()` the module you created here and call its exported functions.
 * [Modules](/runtime/modules.md) — the `require()`/`module.exports`
   mechanics, including the `exports` shorthand and built-in modules,
   that pick up where this doc leaves off.
