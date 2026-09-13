@@ -116,25 +116,38 @@ const path = require('node:path');
 
 This makes it clear that the module is a Node.js core module, avoids ambiguity with npm packages, and matches the modern recommendation.
 
-## Memory aid: “F-P-H-E-S-T-U-O-P-C-T-D-Z”
+## Memory aid for beginners: “Fast Pirates Hunt Exotic Ships, Then Use Orange Pizzas, Cooked To Delicious Zest.”
 
-A quick mnemonic for the most common built-ins is:
+This silly sentence helps you remember the modules you use most often:
 
-> File system, Path, HTTP, Events, Stream, Timers, URL, OS, Process, Console, Timers, Diagnostics, Zlib
+- `fs` = Fast
+- `path` = Pirates
+- `http` = Hunt
+- `events` = Exotic
+- `stream` = Ships
+- `timers` = Then
+- `url` = Use
+- `os` = Orange
+- `process` = Pizzas
+- `console` = Cooked
+- `crypto` = To
+- `dns` = Delicious
+- `zlib` = Zest
 
-Or in shorter form:
+A cartoon version looks like this:
 
-> “F-P-H-E-S-T-U-O-P-C-T-D-Z”
+```text
+       ___        ___        ___        ___
+      /   \______/   \______/   \______/   \
+      | fs |  path | http | events | stream |
+      \___/      \___/      \___/      \___/
+          \           |            /
+           \__ timers -> url -> os -> process -> console -> crypto -> dns -> zlib
 
-Use it as a cue to remember the modules you reach for most often:
+      "Fast Pirates Hunt Exotic Ships, Then Use Orange Pizzas, Cooked To Delicious Zest!"
+```
 
-- `fs` and `path`
-- `http` and `https`
-- `events` and `stream`
-- `timers`, `url`, `os`, `process`
-- `console`, `crypto`, `timers`, `diagnostics_channel`, `zlib`
-
-The point is not to memorize every single core module perfectly; it is to remember the main clusters: filesystem, networking, eventing, streams, runtime, and utilities.
+The idea is not to memorize every core module perfectly. The goal is to remember the main groups: filesystem, networking, events, streams, runtime, and utilities.
 
 ## Related
 
