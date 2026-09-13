@@ -116,38 +116,51 @@ const path = require('node:path');
 
 This makes it clear that the module is a Node.js core module, avoids ambiguity with npm packages, and matches the modern recommendation.
 
-## Memory aid for beginners: “Fast Pirates Hunt Exotic Ships, Then Use Orange Pizzas, Cooked To Delicious Zest.”
+## Memory aid for beginners: “Furious Pandas Hop Everywhere, Stealing Tacos, Under Overweight Penguins, Cooking Tandoori Zoodles.”
 
-This silly sentence helps you remember the modules you use most often:
+This is intentionally ridiculous, which is why it sticks:
 
-- `fs` = Fast
-- `path` = Pirates
-- `http` = Hunt
-- `events` = Exotic
-- `stream` = Ships
-- `timers` = Then
-- `url` = Use
-- `os` = Orange
-- `process` = Pizzas
-- `console` = Cooked
-- `crypto` = To
-- `dns` = Delicious
-- `zlib` = Zest
+- `fs` = Furious
+- `path` = Pandas
+- `http` = Hop
+- `events` = Everywhere
+- `stream` = Stealing
+- `timers` = Tacos
+- `url` = Under
+- `os` = Overweight
+- `process` = Penguins
+- `console` = Cooking
+- `crypto` = Tandoori
+- `dns` = Zoodles
+- `zlib` = Zoodles (yes, the same absurd ending)
 
-A cartoon version looks like this:
+Cartoon version:
 
 ```text
-       ___        ___        ___        ___
-      /   \______/   \______/   \______/   \
-      | fs |  path | http | events | stream |
-      \___/      \___/      \___/      \___/
-          \           |            /
-           \__ timers -> url -> os -> process -> console -> crypto -> dns -> zlib
+     ┌───────┐  ┌───────┐  ┌───────┐  ┌───────┐  ┌───────┐
+     │  fs   │  │ path  │  │ http  │  │ events│  │stream │
+     └───┬───┘  └───┬───┘  └───┬───┘  └───┬───┘  └───┬───┘
+         │          │          │          │          │
+         └──────────┴──────────┴──────────┴──────────┘
+                             ↓
+                     "Furious Pandas"
+                         ↓
+                 ┌───────┐ ┌───────┐ ┌───────┐
+                 │timers │ │ url   │ │ os    │
+                 └───────┘ └───────┘ └───────┘
+                         ↓
+                 ┌───────┐ ┌───────┐ ┌───────┐
+                 │process│ │console│ │crypto │
+                 └───────┘ └───────┘ └───────┘
+                         ↓
+                     ┌───────┐ ┌───────┐
+                     │  dns  │ │  zlib │
+                     └───────┘ └───────┘
 
-      "Fast Pirates Hunt Exotic Ships, Then Use Orange Pizzas, Cooked To Delicious Zest!"
+  "Furious Pandas Hop Everywhere, Stealing Tacos, Under Overweight Penguins, Cooking Tandoori Zoodles!"
 ```
 
-The idea is not to memorize every core module perfectly. The goal is to remember the main groups: filesystem, networking, events, streams, runtime, and utilities.
+The lesson: if the memory sentence sounds ridiculous, your brain will keep replaying it until it sticks.
 
 ## Related
 
