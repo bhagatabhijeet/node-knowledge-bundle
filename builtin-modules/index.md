@@ -116,9 +116,9 @@ const path = require('node:path');
 
 This makes it clear that the module is a Node.js core module, avoids ambiguity with npm packages, and matches the modern recommendation.
 
-## Memory aid for beginners: “OS path, fs, http, url, stream, tim, dns, crypto, zlib—my process console screamed while the file system marched down the path, the web URL bounced through a water stream, the timer ticked, the DNS detective found the server, the crypto magician hid the secrets, and the zlib clown squished everything into a tiny package—because that’s how all 50 built-in Node modules do their day job, and somehow it still prints to the console in one ridiculous brain-burst!”
+## Memory aid for beginners: “OS path, fs, http, url, stream, tim, dns, crypto, zlib—my process console watched the file system walk the path, the URL streamed through the web, the timer ticked, the DNS looked up the server, the crypto magician hid the secrets, and the zlib clown compressed the whole mess into one tiny packet—then the console printed it all in one glorious stack overflow of absurdity, because that’s what all 50 built-in Node modules do before coffee.”
 
-This one uses little fragments from real module names, like:
+This one uses fragments from real module names, like:
 
 - `os` = “OS”
 - `path` = “path”
@@ -133,13 +133,13 @@ This one uses little fragments from real module names, like:
 - `process` = “process”
 - `console` = “console”
 
-And the whole sentence is intentionally absurd so your brain remembers the structure instead of a boring list.
+The joke is that it sounds like a ridiculous server log from a haunted dev machine. That makes it easy to remember because it feels like code, not poetry.
 
-A shorter, more punchy version:
+A punchier meme version:
 
-> “OS path, fs, http, url, stream, tim, dns, crypto, zlib—process console says: ‘I’m a clown car full of file paths, web URLs, water streams, ticking timers, DNS detectives, crypto magicians, and zlib zombies—50 built-in modules, and I still print the whole circus!’”
+> “OS path, fs, http, url, stream, tim, dns, crypto, zlib—process console says: ‘I’m a clown car of file paths, web requests, streaming data, ticking timers, DNS detectives, crypto magicians, and zlib zombies; all 50 built-ins are here, and I still crash before I finish printing the stack trace.’”
 
-That is the goal: weird picture + real module fragments + absurd rhythm = instant recall.
+That is the goal: a nonsense sentence that feels like a real developer rant, so it sticks in your head like a bug you can’t forget.
 
 ## Related
 
